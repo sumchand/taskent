@@ -48,3 +48,43 @@
     align-items: flex-start;
   }
 }
+
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.logo img {
+  width: 34px;
+  height: 34px;
+}
+
+.logo span {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.logo .highlight {
+  color: #ff7a00;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* changed */
+  width: min(1180px, calc(100% - 2rem));
+  margin: 1rem auto 0;
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 1.25rem;
+  background: rgba(2, 6, 23, 0.78);
+  backdrop-filter: blur(18px);
+}
