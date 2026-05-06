@@ -17,7 +17,7 @@
 
 .hero-copy h1 {
   max-width: 11ch;
-  font-size: clamp(2.75rem, 5vw, 5.25rem);
+    font-size: clamp(2.75rem, 1vw, 4.25rem);
   letter-spacing: -0.05em;
 }
 
