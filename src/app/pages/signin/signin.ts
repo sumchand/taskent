@@ -3,9 +3,9 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   standalone: true,
-  selector: 'app-header',
+  selector: 'app-signin',
   imports: [RouterLink],
-  templateUrl: './header.html',
-  styleUrl: './header.css',
+  templateUrl: './signin.html',
+  styleUrl: './signin.css',
 })
-export class Header {}
+export class Signin {}
