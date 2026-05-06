@@ -1,0 +1,11 @@
+<svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background -->
+      <rect width="64" height="64" rx="14" fill="#0B1B34" />
+
+      <!-- T Letter -->
+      <text x="18" y="42" font-size="30" fill="white" font-family="Segoe UI, Arial" font-weight="bold">T</text>
+
+      <!-- Orange Check -->
+      <path d="M34 34 L40 40 L52 26" stroke="#FF7A00" stroke-width="4" fill="none" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
