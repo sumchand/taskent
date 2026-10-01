@@ -4,7 +4,7 @@ import { Footer } from './layout/footer/footer';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-   standalone: true,
+  standalone: true,
   selector: 'app-root',
   imports: [RouterOutlet,Header,Footer],
   templateUrl: './app.html',

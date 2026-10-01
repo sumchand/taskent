@@ -29,28 +29,41 @@
       <h2>Launch your account</h2>
     </div>
 
-    <form class="auth-form">
+    <form
+  class="auth-form"
+  [formGroup]="registerForm"
+  (ngSubmit)="onSubmit()"
+>
       <label>
         <span>Full name</span>
-        <input type="text" placeholder="Alex Johnson" />
+    <input
+      type="text"
+      placeholder="Alex Johnson"
+      formControlName="fullName"
+    />
       </label>
 
       <label>
         <span>Work email</span>
-        <input type="email" placeholder="alex@company.com" />
+          <input
+      type="email"
+      placeholder="alex@company.com"
+      formControlName="email"
+    />
       </label>
 
       <label>
         <span>Password</span>
-        <input type="password" placeholder="Create a secure password" />
+          <input
+      type="password"
+      placeholder="Create a secure password"
+      formControlName="password"
+    />
       </label>
 
-      <label>
-        <span>Workspace name</span>
-        <input type="text" placeholder="Product Launch Team" />
-      </label>
-
-      <button type="submit">Create account</button>
+    <button type="submit">
+    Create account
+  </button>
     </form>
 
     <p class="switch-link">
