@@ -30,9 +30,9 @@
     </div>
 
     <form
-  class="auth-form"
-  [formGroup]="registerForm"
-  (ngSubmit)="onSubmit()"
+    class="auth-form"
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmit()"
 >
       <label>
         <span>Full name</span>
@@ -70,5 +70,16 @@
       Already have an account?
       <a routerLink="/signin">Sign in</a>
     </p>
+    
+<!-- Success message -->
+<div class="success-message" *ngIf="successMessage">
+  {{ successMessage }}
+</div>
+
+<!-- Error message -->
+<div class="error-message" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
   </div>
 </section>
