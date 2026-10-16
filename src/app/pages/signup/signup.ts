@@ -32,7 +32,6 @@ export class Signup {
 
   registerForm = this.fb.nonNullable.group({
        fullName: ['', Validators.required],
-
        email: [
          '',
          [

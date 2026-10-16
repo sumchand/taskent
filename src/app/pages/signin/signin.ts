@@ -1,13 +1,17 @@
 
 import { Component, inject } from '@angular/core';
 import { NgIf } from '@angular/common';
+
 import {
   FormBuilder,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+
 import { Router, RouterLink } from '@angular/router';
+
 import { AuthService } from '../../services/auth.service';
+import { CsrfTokenService } from '../../services/csrf-token.service';
 
 @Component({
   standalone: true,
@@ -18,12 +22,12 @@ import { AuthService } from '../../services/auth.service';
     NgIf
   ],
   templateUrl: './signin.html',
-  styleUrl: './signin.css',
+  styleUrl: './signin.css'
 })
 export class Signin {
-
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+  private csrfService = inject(CsrfTokenService);
   private router = inject(Router);
 
   isSubmitting = false;
@@ -39,7 +43,6 @@ export class Signin {
   });
 
   onSubmit(): void {
-
     if (this.loginForm.invalid || this.isSubmitting) {
       this.loginForm.markAllAsTouched();
       return;
@@ -48,66 +51,34 @@ export class Signin {
     this.isSubmitting = true;
     this.errorMessage = '';
 
-    const { email, password, rememberMe } =
+    const { email, password } =
       this.loginForm.getRawValue();
 
     this.authService.login({ email, password }).subscribe({
-
-      // next: (response) => {
-
-      //   if (!response.token) {
-      //     this.errorMessage =
-      //       'Login succeeded, but no authentication token was returned.';
-      //     this.isSubmitting = false;
-      //     return;
-      //   }
-
-      //   // Remove any token from a previous login.
-      //   localStorage.removeItem('token');
-      //   sessionStorage.removeItem('token');
-
-      //   // Keep the user signed in based on their selection.
-      //   const storage = rememberMe
-      //     ? localStorage
-      //     : sessionStorage;
-
-      //   storage.setItem('token', response.token);
-
-      //   // Navigate after successful authentication.
-      //   this.router.navigate(['/dashboard']);
-      // },
-
-      next: (token) => {
-
-        if (!token) {
-          this.errorMessage = 'No authentication token was returned.';
+      next: (response) => {
+        if (!response.csrfToken) {
+          this.errorMessage =
+            'Login succeeded, but the CSRF token was not returned.';
           this.isSubmitting = false;
           return;
         }
-      
-        // Clear any previous token.
-        localStorage.removeItem('token');
-        sessionStorage.removeItem('token');
-      
-        const storage = rememberMe
-          ? localStorage
-          : sessionStorage;
-      
-        // Store the raw JWT string.
-        storage.setItem('token', token);
-      
-        // Redirect to dashboard.
+
+        // Keep the CSRF token in memory.
+        this.csrfService.setToken(response.csrfToken);
+
+        // No JWT storage in localStorage or sessionStorage.
         this.router.navigate(['/dashboard']);
-    },
+      },
 
       error: (error) => {
-
         console.error('Login failed:', error);
 
         this.errorMessage =
           error?.error?.message ||
           'Invalid email or password. Please try again.';
+      },
 
+      complete: () => {
         this.isSubmitting = false;
       }
     });
