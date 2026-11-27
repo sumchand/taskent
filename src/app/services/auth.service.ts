@@ -24,6 +24,12 @@ export interface LoginResponse {
   csrfToken: string;
 }
 
+export interface CurrentUser {
+  userId: string;
+  email: string;
+  role: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,17 +45,28 @@ export class AuthService {
     );
   }
 
-  login(request: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(
-      `${this.apiUrl}/login`,
-      request
-    );
-  }
+login(request: LoginRequest): Observable<LoginResponse> {
+  return this.http.post<LoginResponse>(
+    `${this.apiUrl}/login`,
+    request,
+    {
+      withCredentials: true
+    }
+  );
+}
+
+me(): Observable<CurrentUser> {
+  return this.http.get<CurrentUser>(
+    `${this.apiUrl}/me`,
+    { withCredentials: true }
+  );
+}
 
   logout(): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(
       `${this.apiUrl}/logout`,
-      {}
+      {},
+      { withCredentials: true }
     );
   }
 }

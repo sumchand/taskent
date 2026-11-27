@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CsrfTokenService {
-  private csrfToken: string | null = null;
+  private   : string | null = null;
 
   setToken(token: string): void {
     this.csrfToken = token;
